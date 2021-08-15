@@ -2,6 +2,7 @@ doc/
 ._d/
 ._bcdi/
 ._ncdi/
+_opam/
 Makefile
 VERSION
 config.h
