@@ -319,24 +319,22 @@ type protocol =
 | PROTOCOL_MEMORY
 
 type db_option =
-| OPT_COMPRESS
-| OPT_NAMED_PIPE
-| OPT_LOCAL_INFILE of bool
-| OPT_RECONNECT of bool
-| OPT_SSL_VERIFY_SERVER_CERT of bool
-| REPORT_DATA_TRUNCATION of bool
-| SECURE_AUTH of bool
-| OPT_PROTOCOL of protocol
-| OPT_CONNECT_TIMEOUT of int
-| OPT_READ_TIMEOUT of int
-| OPT_WRITE_TIMEOUT of int
-| INIT_COMMAND of string
-| READ_DEFAULT_FILE of string
-| READ_DEFAULT_GROUP of string
-| SET_CHARSET_DIR of string
-| SET_CHARSET_NAME of string
-| SHARED_MEMORY_BASE_NAME of string
-| OPT_FOUND_ROWS
+| OPT_COMPRESS (* 0 *)
+| OPT_NAMED_PIPE (* 1 *)
+| OPT_FOUND_ROWS (* 2 *)
+| OPT_LOCAL_INFILE of bool (* 0 *)
+| OPT_RECONNECT of bool (* 1 *)
+| REPORT_DATA_TRUNCATION of bool (* 2 *)
+| OPT_PROTOCOL of protocol (* 3 *)
+| OPT_CONNECT_TIMEOUT of int (* 4 *)
+| OPT_READ_TIMEOUT of int (* 5 *)
+| OPT_WRITE_TIMEOUT of int (* 6 *)
+| INIT_COMMAND of string (* 7 *)
+| READ_DEFAULT_FILE of string (* 8 *)
+| READ_DEFAULT_GROUP of string (* 9 *)
+| SET_CHARSET_DIR of string (* 10 *)
+| SET_CHARSET_NAME of string (* 11 *)
+| SHARED_MEMORY_BASE_NAME of string (* 12 *)
 
 external connect    : db_option list -> db -> dbd                             = "db_connect"
 

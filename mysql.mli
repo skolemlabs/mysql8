@@ -52,11 +52,10 @@ type protocol =
 type db_option =
 | OPT_COMPRESS
 | OPT_NAMED_PIPE
+| OPT_FOUND_ROWS  (** Return the number of found (matched) rows, not the number of changed rows. *)
 | OPT_LOCAL_INFILE of bool
 | OPT_RECONNECT of bool
-| OPT_SSL_VERIFY_SERVER_CERT of bool
 | REPORT_DATA_TRUNCATION of bool
-| SECURE_AUTH of bool
 | OPT_PROTOCOL of protocol
 | OPT_CONNECT_TIMEOUT of int (** Connect timeout in seconds *)
 | OPT_READ_TIMEOUT of int (** The timeout in seconds for attempts to read from the server.
@@ -74,7 +73,6 @@ type db_option =
 | SET_CHARSET_NAME of string (** The name of the character set to use as the default character set. *)
 | SHARED_MEMORY_BASE_NAME of string (** The name of the shared-memory object for communication to the server 
                                         on Windows, if the server supports shared-memory connections *)
-| OPT_FOUND_ROWS  (** Return the number of found (matched) rows, not the number of changed rows. *)
 
 (**
   Initialize library (in particular initializes default character set for {!escape} NB it is recommended to always use {!real_escape})
