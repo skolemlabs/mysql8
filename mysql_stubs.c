@@ -208,7 +208,7 @@ db_connect(value options, value args)
   MYSQL *init;
   MYSQL *mysql;
   unsigned int option_int;
-  my_bool option_bool;
+  bool option_bool;
   unsigned long client_flag = 0;
 
   init = mysql_init(NULL);
@@ -227,19 +227,17 @@ db_connect(value options, value args)
         {
           case  0: SET_OPTION_BOOL(OPT_LOCAL_INFILE);
           case  1: SET_OPTION_BOOL(OPT_RECONNECT);
-          case  2: SET_OPTION_BOOL(OPT_SSL_VERIFY_SERVER_CERT);
-          case  3: SET_OPTION_BOOL(REPORT_DATA_TRUNCATION);
-          case  4: SET_OPTION_BOOL(SECURE_AUTH);
-          case  5: SET_OPTION(OPT_PROTOCOL, &ml_mysql_protocol_type[Int_val(v)]);
-          case  6: SET_OPTION_INT(OPT_CONNECT_TIMEOUT);
-          case  7: SET_OPTION_INT(OPT_READ_TIMEOUT);
-          case  8: SET_OPTION_INT(OPT_WRITE_TIMEOUT);
-          case  9: SET_OPTION_STR(INIT_COMMAND);
-          case 10: SET_OPTION_STR(READ_DEFAULT_FILE);
-          case 11: SET_OPTION_STR(READ_DEFAULT_GROUP);
-          case 12: SET_OPTION_STR(SET_CHARSET_DIR);
-          case 13: SET_OPTION_STR(SET_CHARSET_NAME);
-          case 14: SET_OPTION_STR(SHARED_MEMORY_BASE_NAME);
+          case  2: SET_OPTION_BOOL(REPORT_DATA_TRUNCATION);
+          case  3: SET_OPTION(OPT_PROTOCOL, &ml_mysql_protocol_type[Int_val(v)]);
+          case  4: SET_OPTION_INT(OPT_CONNECT_TIMEOUT);
+          case  5: SET_OPTION_INT(OPT_READ_TIMEOUT);
+          case  6: SET_OPTION_INT(OPT_WRITE_TIMEOUT);
+          case  7: SET_OPTION_STR(INIT_COMMAND);
+          case  8: SET_OPTION_STR(READ_DEFAULT_FILE);
+          case  9: SET_OPTION_STR(READ_DEFAULT_GROUP);
+          case 10: SET_OPTION_STR(SET_CHARSET_DIR);
+          case 11: SET_OPTION_STR(SET_CHARSET_NAME);
+          case 12: SET_OPTION_STR(SHARED_MEMORY_BASE_NAME);
           default:
             caml_invalid_argument("Mysql.connect: unknown option");
         }
@@ -300,7 +298,7 @@ db_change_user(value v_dbd, value args)
   char *db;
   char *pwd;
   char *user;
-  my_bool ret;
+  bool ret;
   MYSQL* mysql = check_db(v_dbd,"change_user");
 
   db        = strdup_option(Field(args,1));
@@ -365,7 +363,7 @@ db_select_db(value v_dbd, value v_newdb)
   CAMLparam2(v_dbd,v_newdb);
   MYSQL* mysql = check_db(v_dbd, "select_db");
   char* newdb = strdup(String_val(v_newdb));
-  my_bool ret;
+  bool ret;
 
   caml_enter_blocking_section();
   ret = mysql_select_db(mysql, newdb);
@@ -967,8 +965,8 @@ typedef struct row_t_tag
 
   MYSQL_BIND* bind;
   unsigned long* length;
-  my_bool* error;
-  my_bool* is_null;
+  bool* error;
+  bool* is_null;
 } row_t;
 
 row_t* create_row(MYSQL_STMT* stmt, size_t count)
@@ -979,9 +977,9 @@ row_t* create_row(MYSQL_STMT* stmt, size_t count)
     row->stmt = stmt;
     row->count = count;
     row->bind = calloc(count,sizeof(MYSQL_BIND));
-    row->error = calloc(count,sizeof(my_bool));
+    row->error = calloc(count,sizeof(bool));
     row->length = calloc(count,sizeof(unsigned long));
-    row->is_null = calloc(count,sizeof(my_bool));
+    row->is_null = calloc(count,sizeof(bool));
   }
   return row;
 }
