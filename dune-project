@@ -1,7 +1,7 @@
 (lang dune 2.8)
 (using mdx 0.1)
 
-(name ocaml-mysql8)
+(name mysql8)
 
 (license LGPL-2.1)
 (maintainers "Zach Baylin <zach@skolem.tech>")
@@ -12,7 +12,7 @@
 (generate_opam_files true)
 
 (package
- (name ocaml-mysql8)
+ (name mysql8)
  (synopsis "OCaml bindings to libmysql v8+")
  (depends
   (ocaml (>= 4.08.0))
