@@ -423,9 +423,9 @@ let set2ml str =
     | ' ' | '\t' | '\n' | '\r' | ',' -> wsp acc (i + 1)
     | _ -> loop acc i (i+1)
   and loop acc p_start i =
-    if i = String.length str then (String.sub str p_start (String.length str - p_start)) :: acc else
+    if i = String.length str then (String.sub str ~pos:p_start ~len:(String.length str - p_start)) :: acc else
     match str.[i] with
-    | ' ' | '\t' | '\n' | '\r' | ',' -> wsp (String.sub str p_start (i - p_start) :: acc) (i+1)
+    | ' ' | '\t' | '\n' | '\r' | ',' -> wsp (String.sub str ~pos:p_start ~len:(i - p_start) :: acc) (i+1)
     | _ -> loop acc p_start (i+1)
   in
   List.rev (wsp [] 0)
@@ -541,7 +541,6 @@ let ml2int x    = string_of_int x
 let ml2decimal x    = x
 let ml322int x  = Int32.to_string x
 let ml642int x  = Int64.to_string x
-let mlnative2int x = Nativeint.to_string x
 let ml2float x  = string_of_float x
 let ml2enum x   = escape x
 let ml2renum x  = real_escape x
