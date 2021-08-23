@@ -1,0 +1,3 @@
+(library
+ (name mysql8)
+ (public_name mysql8))
