@@ -1,3 +1,16 @@
 (library
  (name mysql8)
- (public_name mysql8))
+ (public_name mysql8)
+ (foreign_stubs
+  (language c)
+  (flags 
+   (:include c_flags.sexp)))
+ (c_library_flags
+  (:include libs.sexp)))
+
+(rule
+ (targets libs.sexp c_flags.sexp config.h)
+ (deps
+  (:discover config/discover.exe))
+ (action
+  (run %{discover})))

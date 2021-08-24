@@ -11,6 +11,8 @@
 
 (generate_opam_files true)
 
+(use_standard_c_and_cxx_flags true)
+
 (package
  (name mysql8)
  (synopsis "OCaml bindings to libmysql v8+")
