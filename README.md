@@ -2,6 +2,9 @@
 A fork of the [mysql](https://github.com/ygrek/ocaml-mysql) library for OCaml to support MySQL 8+
 
 ## Changes
+### Build
+- Replaces GNU Make-based build system with dune
+
 ### C
 - `my_bool` has been renamed to just `bool`.
 - The deprecated/removed `MySQL` options have been removed.
