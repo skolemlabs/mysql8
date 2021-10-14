@@ -6,6 +6,7 @@
 #include <stdio.h>              /* sprintf */
 #include <string.h>
 #include <stdarg.h>
+#include <stdbool.h>
 
 /* OCaml runtime system */
 #define CAML_NAME_SPACE
