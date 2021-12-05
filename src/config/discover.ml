@@ -34,7 +34,7 @@ let mysql_config_path =
 
 let c_flags =
   match execute_with_output (mysql_config_path ^ " --cflags") with
-  | Some str -> String.split_on_char ' ' str
+  | Some str -> (String.split_on_char ' ' str) @ ["-fPIC"]
   | None -> []
 
 let libs =
