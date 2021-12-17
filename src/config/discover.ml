@@ -35,12 +35,12 @@ let mysql_config_path =
 let c_flags =
   match execute_with_output (mysql_config_path ^ " --cflags") with
   | Some str ->
-    String.split_on_char ' ' str @ [ "-fPIC"; "-L/usr/local/opt/openssl/lib/" ]
+    String.split_on_char ' ' str @ [ "-fPIC" ]
   | None -> []
 
 let libs =
   match execute_with_output (mysql_config_path ^ " --libs") with
-  | Some str -> String.split_on_char ' ' str
+  | Some str -> String.split_on_char ' ' str @ [ "-L/usr/local/opt/openssl/lib/" ]
   | None -> []
 
 let replace_exact rep _with str =
