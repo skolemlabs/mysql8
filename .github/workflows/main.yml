@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  - push
+
+jobs:
+  build:
+    name: Build and test
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        ocaml-version:
+          - 4.12.1
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Use OCaml ${{ matrix.ocaml-version }}
+        uses: avsm/setup-ocaml@v2
+        with:
+          ocaml-compiler: ${{ matrix.ocaml-version }}
+          opam-depext: false
+          opam-pin: false
+
+      - run: opam pin add mysql8.dev -n .
+      - run: opam depext -yt mysql8
+      - run: opam install -t . --deps-only
+      - run: opam exec -- dune build
