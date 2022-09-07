@@ -2,11 +2,27 @@ open Configurator.V1
 open C_define
 open Flags
 
+type package_manager =
+  | Homebrew
+  | Macports
+
 let ccopt s = [ "-ccopt"; s ]
 let cclib s = [ "-cclib"; s ]
 let value_of_bool = function
   | true -> Value.Int 1
   | false -> Value.Int 0
+
+let command_exists cmd =
+  let exit_code = Sys.command @@ Printf.sprintf "which %s > /dev/null" cmd in
+  match exit_code with
+  | 0 -> true
+  | _ -> false
+
+let package_managers = [ ("port", Macports); ("brew", Homebrew) ]
+
+let package_manager =
+  List.find_opt (fun (cmd, _) -> command_exists cmd) package_managers
+  |> Option.map snd
 
 let execute_with_output cmd =
   let ic = Unix.open_process_in cmd in
@@ -41,7 +57,12 @@ let c_flags =
 let libs =
   match execute_with_output (mysql_config_path ^ " --libs") with
   | Some str ->
-    String.split_on_char ' ' str @ [ "-L/usr/local/opt/openssl/lib/" ]
+    (String.split_on_char ' ' str
+    @
+    match package_manager with
+    | Some Homebrew -> [ "-L/usr/local/opt/openssl/lib/" ]
+    | _ -> []
+    )
     |> List.filter (( <> ) "")
   | None -> []
 
