@@ -4,8 +4,8 @@
 (name mysql8)
 
 (license LGPL-2.1)
-(maintainers "Zach Baylin <zach@skolem.tech>")
-(authors "Zach Baylin <zach@skolem.tech>")
+(maintainers "Zach Baylin <zach.baylin@skolem.com>")
+(authors "Zach Baylin <zach.baylin@skolem.com>")
 
 (source (github skolemlabs/mysql8))
 
