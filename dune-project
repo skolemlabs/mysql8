@@ -19,5 +19,6 @@
  (depends
   (ocaml (>= 4.08.0))
   (dune (>= 2.8.0))
+  (dune-configurator (>= 2.8.0))
   (ocamlfind :build)
   (ocamlformat :with-dev-setup)))
