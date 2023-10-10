@@ -2,6 +2,7 @@
 (using mdx 0.1)
 
 (name mysql8)
+(version 1.2.7)
 
 (license LGPL-2.1)
 (maintainers "Zach Baylin <zach.baylin@skolem.com>")
