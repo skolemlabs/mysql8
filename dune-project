@@ -4,8 +4,8 @@
 (name mysql8)
 
 (license LGPL-2.1)
-(maintainers "Zach Baylin <zach@skolem.tech>")
-(authors "Zach Baylin <zach@skolem.tech>")
+(maintainers "Zach Baylin <zach.baylin@skolem.com>")
+(authors "Zach Baylin <zach.baylin@skolem.com>")
 
 (source (github skolemlabs/mysql8))
 
@@ -19,5 +19,6 @@
  (depends
   (ocaml (>= 4.08.0))
   (dune (>= 2.8.0))
+  (dune-configurator (>= 2.8.0))
   (ocamlfind :build)
-  (ocamlformat :dev)))
+  (ocamlformat :with-dev-setup)))

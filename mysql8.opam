@@ -9,8 +9,9 @@ bug-reports: "https://github.com/skolemlabs/mysql8/issues"
 depends: [
   "ocaml" {>= "4.08.0"}
   "dune" {>= "2.8" & >= "2.8.0"}
+  "dune-configurator" {>= "2.8.0"}
   "ocamlfind" {build}
-  "ocamlformat" {dev}
+  "ocamlformat" {with-dev-setup}
   "odoc" {with-doc}
 ]
 build: [
